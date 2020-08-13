@@ -39,42 +39,123 @@ class RadiativeFluxData:
         """
         
         # incl anthropogenic aerosols
-        file_rsdt_aer = path+"piClim-spAer-aer/rsdt/rsdt_Amon_MPI-ESM1-2-LR_piClim-spAer-aer_r1i1p1f1_gn_184901-187912.nc"
-        file_rsut_aer = path+"piClim-spAer-aer/rsut/rsut_Amon_MPI-ESM1-2-LR_piClim-spAer-aer_r1i1p1f1_gn_184901-187912.nc"
-        file_rlut_aer = path+"piClim-spAer-aer/rlut/rlut_Amon_MPI-ESM1-2-LR_piClim-spAer-aer_r1i1p1f1_gn_184901-187912.nc"
+        file_rsdt_aer1 = path+"piClim-spAer-aer/rsdt/rsdt_Amon_MPI-ESM1-2-LR_piClim-spAer-aer_r1i1p1f1_gn_184901-187912.nc"
+        file_rsut_aer1 = path+"piClim-spAer-aer/rsut/rsut_Amon_MPI-ESM1-2-LR_piClim-spAer-aer_r1i1p1f1_gn_184901-187912.nc"
+        file_rlut_aer1 = path+"piClim-spAer-aer/rlut/rlut_Amon_MPI-ESM1-2-LR_piClim-spAer-aer_r1i1p1f1_gn_184901-187912.nc"
 
         # control- without anthro aerosols
-        file_rsdt_c = path+"piClim-control/rsdt/rsdt_Amon_MPI-ESM1-2-LR_piClim-control_r1i1p1f1_gn_184901-187912.nc"
-        file_rsut_c = path+"piClim-control/rsut/rsut_Amon_MPI-ESM1-2-LR_piClim-control_r1i1p1f1_gn_184901-187912.nc"
-        file_rlut_c = path+"piClim-control/rlut/rlut_Amon_MPI-ESM1-2-LR_piClim-control_r1i1p1f1_gn_184901-187912.nc"
+        file_rsdt_c1 = path+"piClim-control/rsdt/rsdt_Amon_MPI-ESM1-2-LR_piClim-control_r1i1p1f1_gn_184901-187912.nc"
+        file_rsut_c1 = path+"piClim-control/rsut/rsut_Amon_MPI-ESM1-2-LR_piClim-control_r1i1p1f1_gn_184901-187912.nc"
+        file_rlut_c1 = path+"piClim-control/rlut/rlut_Amon_MPI-ESM1-2-LR_piClim-control_r1i1p1f1_gn_184901-187912.nc"
+        
+        file_rsdt_aer2 = path+"piClim-spAer-aer/rsdt/rsdt_Amon_MPI-ESM1-2-LR_piClim-spAer-aer_r2i1p1f1_gn_184901-187912.nc"
+        file_rsut_aer2 = path+"piClim-spAer-aer/rsut/rsut_Amon_MPI-ESM1-2-LR_piClim-spAer-aer_r2i1p1f1_gn_184901-187912.nc"
+        file_rlut_aer2 = path+"piClim-spAer-aer/rlut/rlut_Amon_MPI-ESM1-2-LR_piClim-spAer-aer_r2i1p1f1_gn_184901-187912.nc"
+
+        # control- without anthro aerosols
+        file_rsdt_c2 = path+"piClim-control/rsdt/rsdt_Amon_MPI-ESM1-2-LR_piClim-control_r2i1p1f1_gn_184901-187912.nc"
+        file_rsut_c2 = path+"piClim-control/rsut/rsut_Amon_MPI-ESM1-2-LR_piClim-control_r2i1p1f1_gn_184901-187912.nc"
+        file_rlut_c2 = path+"piClim-control/rlut/rlut_Amon_MPI-ESM1-2-LR_piClim-control_r2i1p1f1_gn_184901-187912.nc"
+        
+        file_rsdt_aer3 = path+"piClim-spAer-aer/rsdt/rsdt_Amon_MPI-ESM1-2-LR_piClim-spAer-aer_r3i1p1f1_gn_184901-187912.nc"
+        file_rsut_aer3 = path+"piClim-spAer-aer/rsut/rsut_Amon_MPI-ESM1-2-LR_piClim-spAer-aer_r3i1p1f1_gn_184901-187912.nc"
+        file_rlut_aer3 = path+"piClim-spAer-aer/rlut/rlut_Amon_MPI-ESM1-2-LR_piClim-spAer-aer_r3i1p1f1_gn_184901-187912.nc"
+
+        # control- without anthro aerosols
+        file_rsdt_c3 = path+"piClim-control/rsdt/rsdt_Amon_MPI-ESM1-2-LR_piClim-control_r3i1p1f1_gn_184901-187912.nc"
+        file_rsut_c3 = path+"piClim-control/rsut/rsut_Amon_MPI-ESM1-2-LR_piClim-control_r3i1p1f1_gn_184901-187912.nc"
+        file_rlut_c3 = path+"piClim-control/rlut/rlut_Amon_MPI-ESM1-2-LR_piClim-control_r3i1p1f1_gn_184901-187912.nc"
+        
         
         # read experiment
-        with Dataset(file_rsdt_aer) as nc:
+        with Dataset(file_rsdt_aer1) as nc:
             
-            self.rsdt_aer = nc.variables['rsdt'][:]
+            self.rsdt_aer1 = nc.variables['rsdt'][:]
 
             # read only for first variable and assume the others are the same. To compare, see above the assert. But not sure if that would work
             self.time = nc.variables['time'][:] 
             self.lat = nc.variables['lat'][:]
             self.lon = nc.variables['lon'][:]
 
-        with Dataset(file_rsut_aer) as nc:
+        with Dataset(file_rsut_aer1) as nc:
             
-            self.rsut_aer = nc.variables['rsut'][:]
+            self.rsut_aer1 = nc.variables['rsut'][:]
 
-        with Dataset(file_rlut_aer) as nc:
+        with Dataset(file_rlut_aer1) as nc:
             
-            self.rlut_aer = nc.variables['rlut'][:]
+            self.rlut_aer1 = nc.variables['rlut'][:]
 
         # read control
-        with Dataset(file_rsdt_c) as nc:
+        with Dataset(file_rsdt_c1) as nc:
             
-            self.rsdt_c = nc.variables['rsdt'][:]
+            self.rsdt_c1 = nc.variables['rsdt'][:]
 
-        with Dataset(file_rsut_c) as nc:
+        with Dataset(file_rsut_c1) as nc:
             
-            self.rsut_c = nc.variables['rsut'][:]
+            self.rsut_c1 = nc.variables['rsut'][:]
 
-        with Dataset(file_rlut_c) as nc:
+        with Dataset(file_rlut_c1) as nc:
             
-            self.rlut_c = nc.variables['rlut'][:]
+            self.rlut_c1 = nc.variables['rlut'][:]
+            
+        # realization 2    
+            
+        with Dataset(file_rsdt_aer2) as nc:
+            
+            self.rsdt_aer2 = nc.variables['rsdt'][:]
+
+        with Dataset(file_rsut_aer2) as nc:
+            
+            self.rsut_aer2 = nc.variables['rsut'][:]
+
+        with Dataset(file_rlut_aer2) as nc:
+            
+            self.rlut_aer2 = nc.variables['rlut'][:]
+
+        # read control
+        with Dataset(file_rsdt_c2) as nc:
+            
+            self.rsdt_c2 = nc.variables['rsdt'][:]
+
+        with Dataset(file_rsut_c2) as nc:
+            
+            self.rsut_c2 = nc.variables['rsut'][:]
+
+        with Dataset(file_rlut_c2) as nc:
+            
+            self.rlut_c2 = nc.variables['rlut'][:]
+            
+            # realization 3  
+            
+        with Dataset(file_rsdt_aer3) as nc:
+            
+            self.rsdt_aer3 = nc.variables['rsdt'][:]
+
+        with Dataset(file_rsut_aer3) as nc:
+            
+            self.rsut_aer3 = nc.variables['rsut'][:]
+
+        with Dataset(file_rlut_aer3) as nc:
+            
+            self.rlut_aer3 = nc.variables['rlut'][:]
+
+        # read control
+        with Dataset(file_rsdt_c3) as nc:
+            
+            self.rsdt_c3 = nc.variables['rsdt'][:]
+
+        with Dataset(file_rsut_c3) as nc:
+            
+            self.rsut_c3 = nc.variables['rsut'][:]
+
+        with Dataset(file_rlut_c3) as nc:
+            
+            self.rlut_c3 = nc.variables['rlut'][:]
+            
+            self.rsdt_aer = (self.rsdt_aer1 + self.rsdt_aer2 + self.rsdt_aer3)/3
+            self.rsut_aer = (self.rsut_aer1 + self.rsut_aer2 + self.rsut_aer3)/3
+            self.rlut_aer = (self.rlut_aer1 + self.rlut_aer2 + self.rlut_aer3)/3
+            
+            self.rsdt_c = (self.rsdt_c1 + self.rsdt_c2 + self.rsdt_c3)/3
+            self.rsut_c = (self.rsut_c1 + self.rsut_c2 + self.rsut_c3)/3
+            self.rlut_c = (self.rlut_c1 + self.rlut_c2 + self.rlut_c3)/3
