@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Wed Aug  5 21:18:22 2020
-
+# testing rmate
 @author: rovina
 """
 
@@ -32,10 +32,10 @@ class RadiativeFluxData:
         self.rsut_c = np.nan  # (time, lat , lon)
         self.rlut_c = np.nan  # (time, lat , lon)
         
-    def read(self, path='/home/rovina/KlimaData/aero/CMIP6/RFMIP/', read_metadata=True):
+    def read(self, path='/data/aero/CMIP6/RFMIP/', read_metadata=True):
         """
         Read data
-        Needs 3 files corresponding to control sim and 3 files for sim incl anthropogenic aerosols
+        Needs 3 files corresponding to control sim and 3 files for sim incl anthropogenic aerosols. Has 4 simulations
         """
         
         # incl anthropogenic aerosols

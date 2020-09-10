@@ -32,7 +32,7 @@ class RadiativeFluxData:
         self.rsut_c = np.nan  # (time, lat , lon)
         self.rlut_c = np.nan  # (time, lat , lon)
         
-    def read(self, path='/home/rpinto/KlimaData/CMIP6/RFMIP/', read_metadata=True):
+    def read(self, path='/home/rovina/KlimaData/aero/CMIP6/RFMIP/', read_metadata=True):
         """
         Read data
         Needs 3 files corresponding to control sim and 3 files for sim incl anthropogenic aerosols
