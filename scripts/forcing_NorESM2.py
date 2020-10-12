@@ -31,22 +31,35 @@ class RadiativeFluxData:
         self.rsdt_c = np.nan  # (time, lat , lon)
         self.rsut_c = np.nan  # (time, lat , lon)
         self.rlut_c = np.nan  # (time, lat , lon)
+
+        self.rsutcs_aer = np.nan  # (time, lat , lon)
+        self.rlutcs_aer = np.nan  # (time, lat , lon)
         
-    def read(self, path='/data/aero/CMIP6/RFMIP/', read_metadata=True):
+        self.rsutcs_c = np.nan  # (time, lat , lon)
+        self.rlutcs_c = np.nan  # (time, lat , lon)
+
+        
+    def read(self, path='/home/rpinto/KlimaData/CMIP6/RFMIP/', read_metadata=True):
         """
         Read data
         Needs 3 files corresponding to control sim and 3 files for sim incl anthropogenic aerosols
         """
 
         # incl anthropogenic aerosols
-        file_rsdt_aer = path+"piClim-spAer-aer/rsdt/rsdt_Amon_NorESM2-LM_piClim-spAer-aer_r1i1p1f1_gn_001101-002012.nc"
-        file_rsut_aer = path+"piClim-spAer-aer/rsut/rsut_Amon_NorESM2-LM_piClim-spAer-aer_r1i1p1f1_gn_001101-002012.nc"
-        file_rlut_aer = path+"piClim-spAer-aer/rlut/rlut_Amon_NorESM2-LM_piClim-spAer-aer_r1i1p1f1_gn_001101-002012.nc"
+        file_rsdt_aer = path+"piClim-spAer-aer/rsdt/rsdt_Amon_NorESM2-LM_piClim-spAer-aer_r1i1p1f1_gn_000101-003012.nc"
+        file_rsut_aer = path+"piClim-spAer-aer/rsut/rsut_Amon_NorESM2-LM_piClim-spAer-aer_r1i1p1f1_gn_000101-003012.nc"
+        file_rlut_aer = path+"piClim-spAer-aer/rlut/rlut_Amon_NorESM2-LM_piClim-spAer-aer_r1i1p1f1_gn_000101-003012.nc"
 
         # control- without anthro aerosols
-        file_rsdt_c = path+"piClim-control/rsdt/rsdt_Amon_NorESM2-LM_piClim-control_r1i1p1f1_gn_001101-002012.nc"
-        file_rsut_c = path+"piClim-control/rsut/rsut_Amon_NorESM2-LM_piClim-control_r1i1p1f1_gn_001101-002012.nc"
-        file_rlut_c = path+"piClim-control/rlut/rlut_Amon_NorESM2-LM_piClim-control_r1i1p1f1_gn_001101-002012.nc"
+        file_rsdt_c = path+"piClim-control/rsdt/rsdt_Amon_NorESM2-LM_piClim-control_r1i1p1f1_gn_000101-003012.nc"
+        file_rsut_c = path+"piClim-control/rsut/rsut_Amon_NorESM2-LM_piClim-control_r1i1p1f1_gn_000101-003012.nc"
+        file_rlut_c = path+"piClim-control/rlut/rlut_Amon_NorESM2-LM_piClim-control_r1i1p1f1_gn_000101-003012.nc"
+
+        file_rsutcs_aer = path+"piClim-spAer-aer/rsutcs/rsutcs_Amon_NorESM2-LM_piClim-spAer-aer_r1i1p1f1_gn_000101-003012.nc"
+        file_rlutcs_aer = path+"piClim-spAer-aer/rlutcs/rlutcs_Amon_NorESM2-LM_piClim-spAer-aer_r1i1p1f1_gn_000101-003012.nc"
+        file_rsutcs_c = '/home/rpinto/KlimaData/CMIP6/RFMIP/piClim-control/rsutcs/rsutcs_Amon_NorESM2-LM_piClim-control_r1i1p1f1_gn_000101-003012.nc'
+        file_rlutcs_c = '/home/rpinto/KlimaData/CMIP6/RFMIP/piClim-control/rlutcs/rlutcs_Amon_NorESM2-LM_piClim-control_r1i1p1f1_gn_000101-003012.nc'
+
         
         # read experiment
         with Dataset(file_rsdt_aer) as nc:
@@ -78,3 +91,23 @@ class RadiativeFluxData:
         with Dataset(file_rlut_c) as nc:
             
             self.rlut_c = nc.variables['rlut'][:]
+
+        # clear sky    
+           
+        with Dataset(file_rsutcs_aer) as nc:
+            
+            self.rsutcs_aer = nc.variables['rsutcs'][:]
+
+        with Dataset(file_rlutcs_aer) as nc:
+            
+            self.rlutcs_aer = nc.variables['rlutcs'][:]
+
+        # read control
+
+        with Dataset(file_rsutcs_c) as nc:
+            
+            self.rsutcs_c = nc.variables['rsutcs'][:]
+
+        with Dataset(file_rlutcs_c) as nc:
+            
+            self.rlutcs_c = nc.variables['rlutcs'][:]
